@@ -6,6 +6,9 @@
       <button mat-icon-button (click)="delete(element)" class="delete">
         <mat-icon fontIcon="delete"></mat-icon>
       </button>
+      <button mat-icon-button (click)="edit(element)">
+        <mat-icon fontIcon="edit"></mat-icon>
+      </button>
       {{element.firstName}}
     </td>
   </ng-container>
@@ -14,7 +17,7 @@
     <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
   </ng-container>
   <ng-container matColumnDef="birthDate">
-    <th mat-header-cell *matHeaderCellDef>Birthdate</th>
+    <th mat-header-cell *matHeaderCellDef>Birth Date</th>
     <td mat-cell *matCellDef="let element">{{element.birthDate|date:'YYYY-MM-dd'}}</td>
   </ng-container>
   <ng-container matColumnDef="phoneNumber">
@@ -32,5 +35,5 @@
   <tr mat-header-row *matHeaderRowDef="columns"></tr>
   <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>
-<button mat-raised-button color="primary" (click)="add()">Add</button>
+<button class="add" mat-raised-button color="accent" (click)="add()">Add</button>
 

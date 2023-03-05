@@ -9,7 +9,11 @@ export type ControlsOf<T extends Record<string, any>> = {
   [K in keyof T]: FormControl<T[K]>;
 };
 
-export interface Customer {
+export interface Identifiable {
+  id: string;
+}
+
+export interface Customer extends Identifiable {
   firstName: string;
   lastName: string;
   birthDate: Date;
@@ -25,11 +29,7 @@ export interface Customer {
 })
 export class CustomerListComponent implements OnDestroy {
   readonly columns: (keyof Customer)[] = ['firstName', 'lastName', 'birthDate', 'phoneNumber', 'email', 'bankAccountNumber'];
-  customers: Customer[] = [
-    {
-      firstName: 'Saeed', lastName: 'Khamseh', phoneNumber: '+98935426262', birthDate: new Date(), email: 'saeed.khamseh67@gmail.com', bankAccountNumber: '1111'
-    },
-  ];
+  customers: Customer[] = [];
   private readonly _repositorySub: Subscription;
 
   constructor(private readonly dialog: MatDialog, private readonly repository: CustomerRepository) {
@@ -47,5 +47,9 @@ export class CustomerListComponent implements OnDestroy {
   delete(element: Customer) {
     if (!confirm('Are you sure?')) return;
     this.repository.delete(element);
+  }
+
+  edit(element: Customer) {
+    this.dialog.open<CustomerComponent, any, Customer>(CustomerComponent, {data: element});
   }
 }
