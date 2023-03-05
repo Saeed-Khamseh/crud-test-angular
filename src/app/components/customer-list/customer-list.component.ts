@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {CustomerComponent} from "../customer/customer.component";
 
 export interface Customer {
   firstName: string;
@@ -21,4 +23,11 @@ export class CustomerListComponent {
       firstName: 'Saeed', lastName: 'Khamseh', phoneNumber: '+98935426262', birthDate: new Date(), email: 'saeed.khamseh67@gmail.com', bankAccountNumber: '1111'
     },
   ];
+
+  constructor(private readonly dialog: MatDialog) {
+  }
+
+  add() {
+    this.dialog.open(CustomerComponent);
+  }
 }
