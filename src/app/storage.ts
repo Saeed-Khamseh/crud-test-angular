@@ -25,5 +25,16 @@ export class LocalStorage extends Storage {
       return null;
     }
   }
+}
+
+@Injectable()
+export class DummyStorage extends Storage {
+
+  override save(key: string, value: any) {
+  }
+
+  override load(key: string): any {
+    return null;
+  }
 
 }
