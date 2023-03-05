@@ -11,7 +11,6 @@ export abstract class Repository<T extends Identifiable> {
   create(item: T) {
     // here we assign a random id to the element; Better use a solution like UUID, but let's keep things simple for now.
     item.id = Math.floor(Math.random() * Date.now()).toString(16);
-    console.log(item.id, 'item id');
     this.items.push(item);
     this._changes$.next();
   }

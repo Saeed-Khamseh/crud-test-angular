@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, Inject} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ControlsOf, Customer} from "../customer-list/customer-list.component";
 import {CustomerRepository} from "../../repository";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -9,16 +9,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   templateUrl: 'customer.component.html',
   styleUrls: ['customer.component.scss']
 })
-export class CustomerComponent implements OnInit {
+export class CustomerComponent {
 
   readonly form = new FormGroup<ControlsOf<Customer>>({
     id: new FormControl('', {nonNullable: true}),
-    firstName: new FormControl('', {nonNullable: true}),
-    lastName: new FormControl('', {nonNullable: true}),
-    email: new FormControl('', {nonNullable: true}),
-    bankAccountNumber: new FormControl('', {nonNullable: true}),
-    birthDate: new FormControl(new Date(), {nonNullable: true}),
-    phoneNumber: new FormControl('', {nonNullable: true}),
+    firstName: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+    lastName: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+    email: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.email]}),
+    bankAccountNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+    birthDate: new FormControl(new Date(), {nonNullable: true, validators: [Validators.required]}),
+    phoneNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
   });
 
   constructor(private readonly repository: CustomerRepository, private readonly dialogRef: MatDialogRef<CustomerComponent>
@@ -29,10 +29,8 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
-
   save() {
+    if (!this.form.valid) return;
     const value = this.form.getRawValue();
     if (this.editData) this.repository.update(value); else this.repository.create(value);
     this.dialogRef.close(true);
