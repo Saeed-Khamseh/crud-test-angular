@@ -18,7 +18,8 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Phone Number</mat-label>
-    <input matInput [formControl]="form.controls.phoneNumber">
+    <input matInput [formControl]="form.controls.phoneNumber" placeholder="+(CountryCode)(Number)">
+    <mat-error *ngIf="form.controls.phoneNumber.hasError('pattern')">Phone number format is invalid.</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Email</mat-label>

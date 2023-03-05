@@ -1,9 +1,10 @@
 import {Component, Inject} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {ControlsOf, Customer} from "../customer-list/customer-list.component";
 import {CustomerRepository} from "../../repository";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {delay, map, of, timer} from "rxjs";
+import {delay, map, of} from "rxjs";
+import {PhoneNumberType, PhoneNumberUtil} from 'google-libphonenumber';
 
 @Component({
   selector: 'customer',
@@ -11,6 +12,15 @@ import {delay, map, of, timer} from "rxjs";
   styleUrls: ['customer.component.scss']
 })
 export class CustomerComponent {
+
+  readonly mobileNumberValidator: ValidatorFn = (control: AbstractControl<string>) => {
+    try {
+      const numberUtil = PhoneNumberUtil.getInstance();
+      return numberUtil.isPossibleNumberForType(numberUtil.parse(control.value), PhoneNumberType.MOBILE) ? null : {pattern: true};
+    } catch (e) {
+      return {pattern: true};
+    }
+  };
 
   readonly emailUniquenessValidator: AsyncValidatorFn = (control: AbstractControl<string>) => {
     return of(control.value).pipe(delay(300), map((email) => this.repository.findByEmail(email)),
@@ -29,7 +39,7 @@ export class CustomerComponent {
     email: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.email], asyncValidators: [this.emailUniquenessValidator]}),
     bankAccountNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     birthDate: new FormControl(new Date(), {nonNullable: true, validators: [Validators.required]}),
-    phoneNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
+    phoneNumber: new FormControl('', {nonNullable: true, validators: [Validators.required, this.mobileNumberValidator]}),
   }, {asyncValidators: this.customerUniquenessValidator});
 
   constructor(private readonly repository: CustomerRepository, private readonly dialogRef: MatDialogRef<CustomerComponent>
