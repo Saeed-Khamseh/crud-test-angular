@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {CustomerComponent} from "../customer/customer.component";
 
 export interface Customer {

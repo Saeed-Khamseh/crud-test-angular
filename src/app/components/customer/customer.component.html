@@ -1,6 +1,33 @@
 <h2 mat-dialog-title>Add Customer</h2>
 <form mat-dialog-content fxLayout="row wrap">
-  Dialog form
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Birth Date</mat-label>
+    <input matInput readonly [matDatepicker]="birthDatepicker" (click)="birthDatepicker.open()">
+    <mat-datepicker-toggle matSuffix [for]="birthDatepicker" tabindex="-1">
+      <mat-icon matDatepickerToggleIcon></mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #birthDatepicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone Number</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Bank Account No.</mat-label>
+    <input matInput>
+  </mat-form-field>
 </form>
 <mat-dialog-actions>
   <button mat-raised-button color="primary" type="submit">Save</button>
