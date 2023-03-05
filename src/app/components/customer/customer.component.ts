@@ -1,8 +1,9 @@
 import {Component, Inject} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ControlsOf, Customer} from "../customer-list/customer-list.component";
 import {CustomerRepository} from "../../repository";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {map, timer} from "rxjs";
 
 @Component({
   selector: 'customer',
@@ -11,11 +12,15 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class CustomerComponent {
 
+  readonly emailUniquenessValidator: AsyncValidatorFn = (control: AbstractControl<string>) => {
+    return timer(300).pipe(map(() => this.repository.findByEmail(control.value)),
+      map((foundCustomer) => foundCustomer == null || foundCustomer.id == this.form.controls.id.value ? null : {duplicate: true}));
+  };
   readonly form = new FormGroup<ControlsOf<Customer>>({
     id: new FormControl('', {nonNullable: true}),
     firstName: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     lastName: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
-    email: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.email]}),
+    email: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.email], asyncValidators: [this.emailUniquenessValidator]}),
     bankAccountNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     birthDate: new FormControl(new Date(), {nonNullable: true, validators: [Validators.required]}),
     phoneNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
@@ -30,6 +35,7 @@ export class CustomerComponent {
   }
 
   save() {
+    this.form.markAllAsTouched();
     if (!this.form.valid) return;
     const value = this.form.getRawValue();
     if (this.editData) this.repository.update(value); else this.repository.create(value);

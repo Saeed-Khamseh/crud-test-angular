@@ -14,12 +14,13 @@ import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/mate
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CastPipe} from "./pipes/cast.pipe";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [AppComponent, CustomerComponent, CustomerListComponent, CastPipe],
   imports: [BrowserModule, BrowserAnimationsModule, MatTableModule, MatDialogModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatIconModule,
-    MatNativeDateModule, ReactiveFormsModule],
+    MatNativeDateModule, ReactiveFormsModule, MatProgressSpinnerModule],
   providers: [
     {provide: DateAdapter, useClass: NativeDateAdapter},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: <MatFormFieldDefaultOptions>{appearance: 'outline', hideRequiredMarker: true}},

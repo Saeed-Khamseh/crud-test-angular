@@ -4,7 +4,7 @@ import {Injectable} from "@angular/core";
 
 export abstract class Repository<T extends Identifiable> {
 
-  private items: T[] = [];
+  protected items: T[] = [];
   private readonly _changes$ = new Subject<void>();
   readonly changes$ = this._changes$.asObservable();
 
@@ -37,4 +37,9 @@ export abstract class Repository<T extends Identifiable> {
 
 @Injectable({providedIn: 'root'})
 export class CustomerRepository extends Repository<Customer> {
+
+  findByEmail(email: string): Customer|undefined {
+    const search = email.toLowerCase();
+    return this.items.find(x => x.email.toLowerCase() === search);
+  }
 }

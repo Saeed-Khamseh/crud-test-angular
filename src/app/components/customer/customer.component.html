@@ -23,6 +23,8 @@
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input matInput [formControl]="form.controls.email">
+    <mat-progress-spinner matSuffix diameter="16" mode="indeterminate" *ngIf="form.controls.email.pending" color="accent"></mat-progress-spinner>
+    <mat-error *ngIf="form.controls.email.hasError('duplicate')">Email address is duplicate.</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Bank Account No.</mat-label>
