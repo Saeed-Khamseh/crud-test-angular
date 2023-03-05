@@ -28,6 +28,7 @@ export interface Customer extends Identifiable {
   styleUrls: ['customer-list.component.scss']
 })
 export class CustomerListComponent implements OnDestroy {
+  readonly Customer!: Customer;
   readonly columns: (keyof Customer)[] = ['firstName', 'lastName', 'birthDate', 'phoneNumber', 'email', 'bankAccountNumber'];
   customers: Customer[] = [];
   private readonly _repositorySub: Subscription;
