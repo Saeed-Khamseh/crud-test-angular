@@ -1,12 +1,20 @@
-import {Subject} from "rxjs";
+import {shareReplay, Subject} from "rxjs";
 import {Customer, Identifiable} from "./components/customer-list/customer-list.component";
 import {Injectable} from "@angular/core";
+import {Storage} from "./storage";
 
 export abstract class Repository<T extends Identifiable> {
-
+  readonly storageKey = 'customer-repository';
   protected items: T[] = [];
   private readonly _changes$ = new Subject<void>();
-  readonly changes$ = this._changes$.asObservable();
+  readonly changes$ = this._changes$.asObservable().pipe(shareReplay(1));
+
+  protected constructor(protected storage: Storage) {
+    // it's not performance friendly to rewrite back all items into local storage on every change. but that's the simplest solution.
+    this.changes$.subscribe(() => this.storage.save(this.storageKey, this.getAll()));
+    this.items = this.storage.load(this.storageKey) ?? [];
+    this._changes$.next();
+  }
 
   create(item: T) {
     // here we assign a random id to the element; Better use a solution like UUID, but let's keep things simple for now.
@@ -37,6 +45,10 @@ export abstract class Repository<T extends Identifiable> {
 
 @Injectable({providedIn: 'root'})
 export class CustomerRepository extends Repository<Customer> {
+
+  constructor(storage: Storage) {
+    super(storage);
+  }
 
   findByEmail(email: string): Customer | undefined {
     const search = email.toLowerCase();

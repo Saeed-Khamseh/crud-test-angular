@@ -15,6 +15,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions} from "@angul
 import {ReactiveFormsModule} from "@angular/forms";
 import {CastPipe} from "./pipes/cast.pipe";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {LocalStorage, Storage} from "./storage";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -23,6 +24,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatNativeDateModule, ReactiveFormsModule, MatProgressSpinnerModule],
   providers: [
     {provide: DateAdapter, useClass: NativeDateAdapter},
+    {provide: Storage, useClass: LocalStorage},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: <MatFormFieldDefaultOptions>{appearance: 'outline', hideRequiredMarker: true}},
   ]
 })
