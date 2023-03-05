@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "crud-test-angular-latest"
+  "defaultProject": "crud-test-angular-latest",
+  "cli": {
+    "analytics": false
+  }
 }
