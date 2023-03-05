@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CustomerComponent} from "../customer/customer.component";
 import {FormControl} from "@angular/forms";
+import {CustomerRepository} from "../../repository";
+import {debounceTime, Subscription} from "rxjs";
 
 export type ControlsOf<T extends Record<string, any>> = {
   [K in keyof T]: FormControl<T[K]>;
@@ -21,18 +23,24 @@ export interface Customer {
   templateUrl: 'customer-list.component.html',
   styleUrls: ['customer-list.component.scss']
 })
-export class CustomerListComponent {
+export class CustomerListComponent implements OnDestroy {
   readonly columns: (keyof Customer)[] = ['firstName', 'lastName', 'birthDate', 'phoneNumber', 'email', 'bankAccountNumber'];
-  readonly customers: Customer[] = [
+  customers: Customer[] = [
     {
       firstName: 'Saeed', lastName: 'Khamseh', phoneNumber: '+98935426262', birthDate: new Date(), email: 'saeed.khamseh67@gmail.com', bankAccountNumber: '1111'
     },
   ];
+  private readonly _repositorySub: Subscription;
 
-  constructor(private readonly dialog: MatDialog) {
+  constructor(private readonly dialog: MatDialog, private readonly repository: CustomerRepository) {
+    this._repositorySub = this.repository.changes$.pipe(debounceTime(100)).subscribe(() => this.customers = this.repository.getAll());
   }
 
   add() {
     this.dialog.open(CustomerComponent);
+  }
+
+  ngOnDestroy() {
+    this._repositorySub.unsubscribe();
   }
 }
