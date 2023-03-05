@@ -29,6 +29,11 @@
             "styles": [
               "src/css/main.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/css"
+              ]
+            },
             "scripts": []
           },
           "configurations": {

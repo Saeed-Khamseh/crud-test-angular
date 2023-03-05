@@ -16,12 +16,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CastPipe} from "./pipes/cast.pipe";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LocalStorage, Storage} from "./storage";
+import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [AppComponent, CustomerComponent, CustomerListComponent, CastPipe],
   imports: [BrowserModule, BrowserAnimationsModule, MatTableModule, MatDialogModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatIconModule,
-    MatNativeDateModule, ReactiveFormsModule, MatProgressSpinnerModule],
+    MatNativeDateModule, ReactiveFormsModule, MatProgressSpinnerModule, FlexModule],
   providers: [
     {provide: DateAdapter, useClass: NativeDateAdapter},
     {provide: Storage, useClass: LocalStorage},

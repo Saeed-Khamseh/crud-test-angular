@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>{{editData ? 'Edit Customer' : 'Add Customer'}}</h2>
 <form mat-dialog-content fxLayout="row wrap" [formGroup]="form">
-  <mat-form-field>
+  <mat-form-field fxFlex="calc(33% - 4px)" fxFlex.lt-md="calc(50% - 4px)" fxFlex.xs="100%">
     <mat-label>First Name</mat-label>
     <input matInput [formControl]="form.controls.firstName">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="calc(33% - 4px)" fxFlex.lt-md="calc(50% - 4px)" fxFlex.xs="100%">
     <mat-label>Last Name</mat-label>
     <input matInput [formControl]="form.controls.lastName">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="calc(33% - 4px)" fxFlex.lt-md="calc(50% - 4px)" fxFlex.xs="100%">
     <mat-label>Birth Date</mat-label>
     <input matInput readonly [matDatepicker]="birthDatepicker" (click)="birthDatepicker.open()" [formControl]="form.controls.birthDate">
     <mat-datepicker-toggle matSuffix [for]="birthDatepicker" tabindex="-1">
@@ -16,18 +16,18 @@
     </mat-datepicker-toggle>
     <mat-datepicker #birthDatepicker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="calc(33% - 4px)" fxFlex.lt-md="calc(50% - 4px)" fxFlex.xs="100%">
     <mat-label>Phone Number</mat-label>
     <input matInput [formControl]="form.controls.phoneNumber" placeholder="+(CountryCode)(Number)">
     <mat-error *ngIf="form.controls.phoneNumber.hasError('pattern')">Phone number format is invalid.</mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="calc(33% - 4px)" fxFlex.lt-md="calc(50% - 4px)" fxFlex.xs="100%">
     <mat-label>Email</mat-label>
     <input matInput [formControl]="form.controls.email">
     <mat-progress-spinner matSuffix diameter="16" mode="indeterminate" *ngIf="form.controls.email.pending" color="accent"></mat-progress-spinner>
     <mat-error *ngIf="form.controls.email.hasError('duplicate')">Email address is duplicate.</mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="calc(33% - 4px)" fxFlex.lt-md="calc(50% - 4px)" fxFlex.xs="100%">
     <mat-label>Bank Account No.</mat-label>
     <input matInput [formControl]="form.controls.bankAccountNumber">
   </mat-form-field>
@@ -35,5 +35,5 @@
   <div class="error" *ngIf="form.hasError('duplicate')">This item already exists.</div>
 </form>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" type="submit" (click)="save()">Save</button>
+  <button mat-raised-button color="primary" type="submit" (click)="save()" class="save">Save</button>
 </mat-dialog-actions>

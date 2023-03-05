@@ -44,10 +44,7 @@ export class CustomerComponent {
 
   constructor(private readonly repository: CustomerRepository, private readonly dialogRef: MatDialogRef<CustomerComponent>
     , @Inject(MAT_DIALOG_DATA) public readonly editData?: Customer) {
-    this.form.reset(editData ?? {
-      firstName: 'name', lastName: 'family', email: 'dummy@example.com', phoneNumber: '+98123445',
-      birthDate: new Date(), bankAccountNumber: '12345'
-    });
+    this.form.reset(editData ?? {});
   }
 
   save() {

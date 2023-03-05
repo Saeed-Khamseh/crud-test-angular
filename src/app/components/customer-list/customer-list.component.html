@@ -1,51 +1,54 @@
 <h2>Customers list</h2>
-<table mat-table [dataSource]="customers" class="grid">
-  <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef>First Name</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="(element|as:Customer); let customer">
-        <button mat-icon-button (click)="delete(customer)" class="delete">
-          <mat-icon fontIcon="delete"></mat-icon>
-        </button>
-        <button mat-icon-button (click)="edit(customer)">
-          <mat-icon fontIcon="edit"></mat-icon>
-        </button>
-        {{customer.firstName}}
-      </ng-container>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef>Last Name</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="(element|as:Customer); let customer">{{customer.lastName}}</ng-container>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="birthDate">
-    <th mat-header-cell *matHeaderCellDef>Birth Date</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="(element|as:Customer); let customer">{{customer.birthDate|date:'YYYY-MM-dd'}}</ng-container>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="phoneNumber">
-    <th mat-header-cell *matHeaderCellDef>Phone Number</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="(element|as:Customer); let customer">{{customer.phoneNumber}}</ng-container>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="(element|as:Customer); let customer">{{customer.email}}</ng-container>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="bankAccountNumber">
-    <th mat-header-cell *matHeaderCellDef>Bank Account Number</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="(element|as:Customer); let customer">{{customer.bankAccountNumber}}</ng-container>
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let _; columns: columns;"></tr>
-</table>
-<button class="add" mat-raised-button color="accent" (click)="add()">Add</button>
-
+<div class="grid">
+  <table mat-table [dataSource]="customers">
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="(element|as:Customer); let customer">
+          <button mat-icon-button (click)="delete(customer)" class="delete">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+          <button mat-icon-button (click)="edit(customer)">
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          {{customer.firstName}}
+        </ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="(element|as:Customer); let customer">{{customer.lastName}}</ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+      <th mat-header-cell *matHeaderCellDef>Birth Date</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="(element|as:Customer); let customer">{{customer.birthDate|date:'YYYY-MM-dd'}}</ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="(element|as:Customer); let customer">{{customer.phoneNumber}}</ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="(element|as:Customer); let customer">{{customer.email}}</ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="bankAccountNumber">
+      <th mat-header-cell *matHeaderCellDef>Bank Account Number</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="(element|as:Customer); let customer">{{customer.bankAccountNumber}}</ng-container>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let _; columns: columns;"></tr>
+  </table>
+  <button mat-icon-button (click)="add()" color="accent" class="add">
+    <mat-icon fontIcon="add"></mat-icon>
+  </button>
+</div>

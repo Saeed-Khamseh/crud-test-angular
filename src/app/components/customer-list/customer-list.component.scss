@@ -3,6 +3,28 @@
 .grid {
   width: 100%;
   @include mat.elevation(8);
+  position: relative;
+  padding-bottom: 36px;
+
+  .mat-table {
+    width: 100%;
+  }
+
+  .add {
+    position: absolute;
+    right: 16px;
+    bottom: 8px;
+    width: 48px;
+    height: 48px;
+    z-index: 1;
+    border-radius: 999px;
+    background-color: mat.get-color-from-palette(mat.$deep-orange-palette, 500);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include mat.elevation(4);
+  }
 }
 
 .delete {

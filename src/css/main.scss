@@ -1,12 +1,12 @@
 @use '@angular/material' as mat;
-@import "variables";
+@use "variables" as v;
 
 @include mat.core();
 
 $my-theme: mat.define-light-theme((
   color: (
-    primary: $primary-palette,
-    accent: $accent-palette,
+    primary: v.$primary-palette,
+    accent: v.$accent-palette,
   )
 ));
 
@@ -21,5 +21,15 @@ $my-theme: mat.define-light-theme((
 
   td.mat-cell {
     text-align: center;
+  }
+}
+
+.mat-dialog-container {
+  .mat-dialog-title {
+    background: v.$primary-color;
+    margin: -24px -24px 24px -24px;
+    text-align: center;
+    color: white;
+    line-height: 2;
   }
 }
