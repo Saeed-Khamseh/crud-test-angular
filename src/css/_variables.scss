@@ -1,0 +1,10 @@
+@use "sass:math";
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+$base-font-size: 12px;
+$primary-palette: mat.define-palette(mat.$blue-palette, 500);
+$primary-color: mat.get-color-from-palette($primary-palette);
+$accent-palette: mat.define-palette(mat.$amber-palette, 900);
+$accent-color: mat.get-color-from-palette(mat.$amber-palette, 900);
+$overlay-backdrop-color: rgba(0, 0, 0, 0.7);

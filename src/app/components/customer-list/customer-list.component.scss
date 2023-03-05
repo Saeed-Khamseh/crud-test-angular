@@ -1,0 +1,6 @@
+@use '@angular/material' as mat;
+
+.grid {
+  width: 100%;
+  @include mat.elevation(8);
+}
