@@ -2,7 +2,12 @@
 <table mat-table [dataSource]="customers" class="grid">
   <ng-container matColumnDef="firstName">
     <th mat-header-cell *matHeaderCellDef>First Name</th>
-    <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="delete(element)" class="delete">
+        <mat-icon fontIcon="delete"></mat-icon>
+      </button>
+      {{element.firstName}}
+    </td>
   </ng-container>
   <ng-container matColumnDef="lastName">
     <th mat-header-cell *matHeaderCellDef>Last Name</th>

@@ -13,6 +13,14 @@ export abstract class Repository<T extends object> {
     this._changes$.next();
   }
 
+  delete(element: T): boolean {
+    const indexOf = this.items.indexOf(element);
+    if (indexOf < 0) return false;
+    this.items.splice(indexOf, 1);
+    this._changes$.next();
+    return true;
+  }
+
   getAll(): T[] {
     return [...this.items];
   }

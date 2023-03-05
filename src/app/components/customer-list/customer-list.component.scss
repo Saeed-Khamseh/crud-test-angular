@@ -4,3 +4,7 @@
   width: 100%;
   @include mat.elevation(8);
 }
+
+.delete {
+  color: mat.get-color-from-palette(mat.$red-palette, 500);
+}

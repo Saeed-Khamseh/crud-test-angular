@@ -43,4 +43,9 @@ export class CustomerListComponent implements OnDestroy {
   ngOnDestroy() {
     this._repositorySub.unsubscribe();
   }
+
+  delete(element: Customer) {
+    if (!confirm('Are you sure?')) return;
+    this.repository.delete(element);
+  }
 }
