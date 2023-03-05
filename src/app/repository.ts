@@ -38,8 +38,14 @@ export abstract class Repository<T extends Identifiable> {
 @Injectable({providedIn: 'root'})
 export class CustomerRepository extends Repository<Customer> {
 
-  findByEmail(email: string): Customer|undefined {
+  findByEmail(email: string): Customer | undefined {
     const search = email.toLowerCase();
     return this.items.find(x => x.email.toLowerCase() === search);
+  }
+
+  findByCredentials(firstName: string, lastName: string, birthDate: Date): Customer | undefined {
+    return this.items.find(x => {
+      return x.firstName == firstName && x.lastName == lastName && x.birthDate.toDateString() == birthDate.toDateString();
+    });
   }
 }

@@ -3,7 +3,7 @@ import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, Validators} f
 import {ControlsOf, Customer} from "../customer-list/customer-list.component";
 import {CustomerRepository} from "../../repository";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {map, timer} from "rxjs";
+import {delay, map, of, timer} from "rxjs";
 
 @Component({
   selector: 'customer',
@@ -13,9 +13,15 @@ import {map, timer} from "rxjs";
 export class CustomerComponent {
 
   readonly emailUniquenessValidator: AsyncValidatorFn = (control: AbstractControl<string>) => {
-    return timer(300).pipe(map(() => this.repository.findByEmail(control.value)),
+    return of(control.value).pipe(delay(300), map((email) => this.repository.findByEmail(email)),
       map((foundCustomer) => foundCustomer == null || foundCustomer.id == this.form.controls.id.value ? null : {duplicate: true}));
   };
+
+  readonly customerUniquenessValidator: AsyncValidatorFn = (control: AbstractControl<Customer>) => {
+    return of(control.value).pipe(delay(300), map((x) => this.repository.findByCredentials(x.firstName, x.lastName, x.birthDate)),
+      map((foundCustomer) => foundCustomer == null || foundCustomer.id == this.form.controls.id.value ? null : {duplicate: true}));
+  };
+
   readonly form = new FormGroup<ControlsOf<Customer>>({
     id: new FormControl('', {nonNullable: true}),
     firstName: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
@@ -24,7 +30,7 @@ export class CustomerComponent {
     bankAccountNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
     birthDate: new FormControl(new Date(), {nonNullable: true, validators: [Validators.required]}),
     phoneNumber: new FormControl('', {nonNullable: true, validators: [Validators.required]}),
-  });
+  }, {asyncValidators: this.customerUniquenessValidator});
 
   constructor(private readonly repository: CustomerRepository, private readonly dialogRef: MatDialogRef<CustomerComponent>
     , @Inject(MAT_DIALOG_DATA) public readonly editData?: Customer) {
