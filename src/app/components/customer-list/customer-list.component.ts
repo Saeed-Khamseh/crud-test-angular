@@ -1,6 +1,11 @@
 import {Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CustomerComponent} from "../customer/customer.component";
+import {FormControl} from "@angular/forms";
+
+export type ControlsOf<T extends Record<string, any>> = {
+  [K in keyof T]: FormControl<T[K]>;
+};
 
 export interface Customer {
   firstName: string;

@@ -1,16 +1,16 @@
 <h2 mat-dialog-title>Add Customer</h2>
-<form mat-dialog-content fxLayout="row wrap">
+<form mat-dialog-content fxLayout="row wrap" [formGroup]="form">
   <mat-form-field>
     <mat-label>First Name</mat-label>
-    <input matInput>
+    <input matInput [formControl]="form.controls.firstName">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Last Name</mat-label>
-    <input matInput>
+    <input matInput [formControl]="form.controls.lastName">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Birth Date</mat-label>
-    <input matInput readonly [matDatepicker]="birthDatepicker" (click)="birthDatepicker.open()">
+    <input matInput readonly [matDatepicker]="birthDatepicker" (click)="birthDatepicker.open()" [formControl]="form.controls.birthDate">
     <mat-datepicker-toggle matSuffix [for]="birthDatepicker" tabindex="-1">
       <mat-icon matDatepickerToggleIcon></mat-icon>
     </mat-datepicker-toggle>
@@ -18,15 +18,15 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Phone Number</mat-label>
-    <input matInput>
+    <input matInput [formControl]="form.controls.phoneNumber">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput>
+    <input matInput [formControl]="form.controls.email">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Bank Account No.</mat-label>
-    <input matInput>
+    <input matInput [formControl]="form.controls.bankAccountNumber">
   </mat-form-field>
 </form>
 <mat-dialog-actions>

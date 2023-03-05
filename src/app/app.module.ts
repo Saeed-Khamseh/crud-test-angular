@@ -12,12 +12,13 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatIconModule} from "@angular/material/icon";
 import {DateAdapter, MatNativeDateModule, NativeDateAdapter} from "@angular/material/core";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [AppComponent, CustomerComponent, CustomerListComponent],
   imports: [BrowserModule, BrowserAnimationsModule, MatTableModule, MatDialogModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatIconModule,
-    MatNativeDateModule],
+    MatNativeDateModule, ReactiveFormsModule],
   providers: [
     {provide: DateAdapter, useClass: NativeDateAdapter},
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: <MatFormFieldDefaultOptions>{appearance: 'outline', hideRequiredMarker: true}},
