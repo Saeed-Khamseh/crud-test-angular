@@ -1,11 +1,5 @@
 import {Injectable} from "@angular/core";
-
-export abstract class Storage {
-
-  abstract save(key: string, value: any): void;
-
-  abstract load(key: string): any;
-}
+import {Storage} from "./storage";
 
 @Injectable({providedIn: 'root'})
 export class LocalStorage extends Storage {
@@ -25,16 +19,4 @@ export class LocalStorage extends Storage {
       return null;
     }
   }
-}
-
-@Injectable()
-export class DummyStorage extends Storage {
-
-  override save(key: string, value: any) {
-  }
-
-  override load(key: string): any {
-    return null;
-  }
-
 }

@@ -15,8 +15,9 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions} from "@angul
 import {ReactiveFormsModule} from "@angular/forms";
 import {CastPipe} from "./pipes/cast.pipe";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {LocalStorage, Storage} from "./storage";
+import {Storage} from "./services/storage";
 import {FlexModule} from "@angular/flex-layout";
+import {LocalStorage} from "./services/local-storage";
 
 @NgModule({
   bootstrap: [AppComponent],

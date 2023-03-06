@@ -12,7 +12,7 @@
     <mat-label>Birth Date</mat-label>
     <input matInput readonly [matDatepicker]="birthDatepicker" (click)="birthDatepicker.open()" [formControl]="form.controls.birthDate">
     <mat-datepicker-toggle matSuffix [for]="birthDatepicker" tabindex="-1">
-      <mat-icon matDatepickerToggleIcon></mat-icon>
+      <mat-icon matDatepickerToggleIcon fontIcon="calendar_today"></mat-icon>
     </mat-datepicker-toggle>
     <mat-datepicker #birthDatepicker></mat-datepicker>
   </mat-form-field>
@@ -32,7 +32,7 @@
     <input matInput [formControl]="form.controls.bankAccountNumber">
   </mat-form-field>
   <mat-progress-spinner matSuffix diameter="16" mode="indeterminate" *ngIf="form.pending" color="accent"></mat-progress-spinner>
-  <div class="error" *ngIf="form.hasError('duplicate')">This item already exists.</div>
+  <div class="error" *ngIf="form.hasError('duplicate')">Another customer already exists with the given first name, last name and birthDate.</div>
 </form>
 <mat-dialog-actions>
   <button mat-raised-button color="primary" type="submit" (click)="save()" class="save">Save</button>

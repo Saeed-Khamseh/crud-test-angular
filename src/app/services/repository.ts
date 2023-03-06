@@ -1,7 +1,6 @@
 import {shareReplay, Subject} from "rxjs";
-import {Customer, Identifiable} from "./components/customer-list/customer-list.component";
-import {Injectable} from "@angular/core";
 import {Storage} from "./storage";
+import {Identifiable} from "../models/customer";
 
 export abstract class Repository<T extends Identifiable> {
   readonly storageKey = 'customer-repository';
@@ -43,21 +42,3 @@ export abstract class Repository<T extends Identifiable> {
   }
 }
 
-@Injectable({providedIn: 'root'})
-export class CustomerRepository extends Repository<Customer> {
-
-  constructor(storage: Storage) {
-    super(storage);
-  }
-
-  findByEmail(email: string): Customer | undefined {
-    const search = email.toLowerCase();
-    return this.items.find(x => x.email.toLowerCase() === search);
-  }
-
-  findByCredentials(firstName: string, lastName: string, birthDate: Date): Customer | undefined {
-    return this.items.find(x => {
-      return x.firstName == firstName && x.lastName == lastName && x.birthDate.toDateString() == birthDate.toDateString();
-    });
-  }
-}

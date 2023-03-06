@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-import {CustomerRepository} from "./repository";
-import {DummyStorage} from "./storage";
-import {Customer} from "./components/customer-list/customer-list.component";
+import {Customer} from "../models/customer";
+import {CustomerRepository} from "./customer-repository";
+import {DummyStorage} from "./dummy-storage";
 
 describe('CustomerRepository', () => {
   let service: CustomerRepository;

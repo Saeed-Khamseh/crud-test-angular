@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 :host {
   display: block;
   max-width: 720px;
@@ -9,4 +11,9 @@ form {
 
 .save {
   width: 100%;
+}
+
+.error {
+  color: mat.get-color-from-palette(mat.$red-palette, 500);
+  font-weight: bold;
 }
