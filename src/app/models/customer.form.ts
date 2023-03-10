@@ -10,7 +10,9 @@ export class CustomerForm extends FormGroup<ControlsOf<Customer>> {
   readonly mobileNumberValidator: ValidatorFn = (control: AbstractControl<string>) => {
     try {
       const numberUtil = PhoneNumberUtil.getInstance();
-      return numberUtil.isPossibleNumberForType(numberUtil.parse(control.value), PhoneNumberType.MOBILE) ? null : {pattern: true};
+      const phoneNumber = numberUtil.parse(control.value);
+      const numberType = numberUtil.getNumberType(phoneNumber);
+      return numberType === PhoneNumberType.FIXED_LINE_OR_MOBILE || numberType === PhoneNumberType.MOBILE ? null : {pattern: true};
     } catch (e) {
       return {pattern: true};
     }
