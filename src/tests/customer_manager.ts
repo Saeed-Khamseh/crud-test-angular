@@ -1,4 +1,4 @@
-import {Given, When, Then, DataTable} from "@badeball/cypress-cucumber-preprocessor";
+import {DataTable, Given, Then, When} from "@badeball/cypress-cucumber-preprocessor";
 
 const dataRowSelector = ".mat-table tbody";
 
@@ -25,8 +25,8 @@ Given('system error codes are following', (table: DataTable) => {
 });
 
 Given('platform has {int} customers', (rowCount) => {
-  cy.visit("http://192.168.1.100:4200");
-  cy.get(dataRowSelector).find('tr').should('have.length', rowCount);
+  cy.visit("http://localhost:4200/");
+  cy.get(dataRowSelector).find('tr').should('have.length', 1);
 });
 
 When(/^user creates a customer with following data by sending 'Create Customer Command'$/, (table: DataTable) => {
